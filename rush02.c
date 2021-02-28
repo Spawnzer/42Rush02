@@ -6,7 +6,7 @@
 /*   By: adubeau <marvin@42quebec.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/28 10:41:50 by adubeau           #+#    #+#             */
-/*   Updated: 2021/02/28 15:38:14 by adubeau          ###   ########.fr       */
+/*   Updated: 2021/02/28 16:10:32 by adubeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ char	*ft_getval(int, char *);
 char	*ft_getnb(int);
 int	ft_atoi(char *);
 char	*fstrdup( char *);
+char	*ft_binaire(char *);
 
 
 typedef struct t_list
@@ -68,16 +69,19 @@ void	putstr(char *str)
 		write(1, &str[i], 1);
 		i++;
 			}
+		write(1, " ", 1);
 }
 
 void	printArgv(char *nb, t_list *str)
 {
 	int i;
-
-	i = 1;
+	int a;
+	
+	i = 0;
 	while (nb[i])
 	{	
-		putstr(str[i].val);
+		a = nb[i] - '0';		
+		putstr(str[a].val);
 		i++;
 	}
 }
@@ -88,6 +92,7 @@ int	main(int argc, char **argv)
 	char c;
 	int i;
 	int fd;
+	char *bina;
 	fd = open("numbers.dict.txt", O_RDONLY);
 	i = 0;
 	row = 0;
@@ -109,7 +114,8 @@ int	main(int argc, char **argv)
 	while (str[i].nb != a)
 		i++;
 	printf("%s\n", str[i].val);
-	*/
+	
+	bina = ft_binaire(argv[1]);*/
 	printArgv(argv[1], str);
 }
 
@@ -151,7 +157,33 @@ char	*ft_getnb(int fd)
 	}
 	return (str);
 }
+/*
+char *ft_binaire(char *str)
+{
+	int i;
+	int nb;
+	int temp;
+	char *base;
+	char *bin;
+	
+	base = "01";
+	i = 0;
+	while (str[i])
+	{
+		nb = nb * 10 + (str[i] - '0');
+		i++;
+	}
+	i = 0;
+	while (nb != 0)
+	{
+		temp = nb % 2;
+		bin[i++] = base[temp];
+		nb = nb / 2;
+	}
+	return (bin);
 
+}
+*/
 int		ft_is_space(char c)
 {
 	if (c == '\f' || c == 32 || c == '\n' || c == '\r' ||
