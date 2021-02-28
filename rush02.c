@@ -6,7 +6,7 @@
 /*   By: adubeau <marvin@42quebec.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/28 10:41:50 by adubeau           #+#    #+#             */
-/*   Updated: 2021/02/28 12:41:10 by adubeau          ###   ########.fr       */
+/*   Updated: 2021/02/28 13:49:59 by adubeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,22 @@
 #include <fcntl.h>
 #include <stdio.h>
 
-typedef struct s_list
+char	*ft_getval(int, char *);
+t_list	*ft_makeStruct(int);
+char	*ft_getnb(int);
+int	ft_atoi(char *);
+char	*strdup( char *);
+
+
+typedef struct t_list
 {
 	int nb;
 	char *val;
-}		s_list;
+}		t_list;
 
 int	main(int argc, char **argv)
 {
-	s_list	*str;
+	t_list	*str;
 	int row;
 	char c;
 	int i;
@@ -37,22 +44,22 @@ int	main(int argc, char **argv)
 	str = ft_makeStruct(row);
 	while (i < row)
 	{
-		fprintf("%d", str[i].nb);
+	//	fprintf("%d", str[i].nb);
 		i++;
 	}
 
 }
 
-s_list *ft_makeStruct(int row)
+t_list *ft_makeStruct(int row)
 {
 	int i;
 	int fd;
 	char c[1];
-	s_list *str;
+	t_list *str;
 	char *tmp;
 
 	fd = open("numbers.dict.txt", O_RDONLY);
-	str = (S_list *)malloc(sizeof(s_list) * row);
+	str = (t_list *)malloc(sizeof(t_list) * row);
 	i = 0;
 	while (i < row)
 	{
@@ -66,12 +73,12 @@ s_list *ft_makeStruct(int row)
 			read(fd, c, 1);
 		tmp = ft_getval(fd, c);
 		
-		str[i].val = strdup(fd);
+		str[i].val = strdup(tmp);
 		i++;
 	}
 }
 
-char	*ft_getval(int fd, char *c)
+char	*ft_getvaal(int fd, char *c)
 {
 	int i;
 	char *str;
@@ -88,7 +95,7 @@ char	*ft_getval(int fd, char *c)
 	return (str);
 }
 
-char	*ft_getnb(int fd)
+char	*ft_getnnb(int fd)
 {
 	int i;
 	char c[1];
@@ -172,7 +179,7 @@ char	*ft_strcpy(char *s1, char *s2)
 	return (s2);
 }
 
-char	*ft_strdup(char *src)
+char	*strdup(char *src)
 {
 	char *dest;
 
@@ -180,4 +187,3 @@ char	*ft_strdup(char *src)
 	dest = ft_strcpy(src, dest);
 	return (!src ? NULL : dest);
 }
-
