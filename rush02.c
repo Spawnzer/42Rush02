@@ -6,7 +6,7 @@
 /*   By: adubeau <marvin@42quebec.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/28 10:41:50 by adubeau           #+#    #+#             */
-/*   Updated: 2021/02/28 14:39:32 by adubeau          ###   ########.fr       */
+/*   Updated: 2021/02/28 15:38:14 by adubeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,30 @@ t_list *ft_makeStruct(int row)
 	}
 	return(str);
 }
+
+void	putstr(char *str)
+{
+	int i;
+
+	i = 0;
+	while (str[i])
+			{
+		write(1, &str[i], 1);
+		i++;
+			}
+}
+
+void	printArgv(char *nb, t_list *str)
+{
+	int i;
+
+	i = 1;
+	while (nb[i])
+	{	
+		putstr(str[i].val);
+		i++;
+	}
+}
 int	main(int argc, char **argv)
 {
 	t_list	*str;
@@ -73,13 +97,20 @@ int	main(int argc, char **argv)
 	str = ft_makeStruct(row);
 	//printf("%d", str->nb);		
 	
-	while (i < row)
+/*	while (i < row)
 	{
 		printf("%d", str[i].nb);
 		write(1, " ", 1);
 		printf("%s\n", str[i].val);
 		i++;
 	}
+	
+	a = 50;
+	while (str[i].nb != a)
+		i++;
+	printf("%s\n", str[i].val);
+	*/
+	printArgv(argv[1], str);
 }
 
 char	*ft_getval(int fd, char *c)
