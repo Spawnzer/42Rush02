@@ -6,7 +6,7 @@
 /*   By: adubeau <marvin@42quebec.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/28 10:41:50 by adubeau           #+#    #+#             */
-/*   Updated: 2021/02/28 14:21:07 by adubeau          ###   ########.fr       */
+/*   Updated: 2021/02/28 14:39:32 by adubeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,30 +29,6 @@ typedef struct t_list
 }		t_list;
 
 t_list *ft_makeStruct(int);
-/*
-int	main(int argc, char **argv)
-{
-	t_list	*str;
-	int row;
-	char c;
-	int i;
-	int fd;
-	fd = open("numbers.dict.txt", O_RDONLY);
-	i = 0;
-	row = 0;
-	while (read(fd, &c, 1))
-			if (c == '\n')
-				row++;
-	str = &ft_makeStruct(row);
-	fprintf("%d", str.nb)
-	while (i < row)
-	{
-		fprintf("%d", str[i].nb);
-		i++;
-	}
-
-}
-*/
 t_list *ft_makeStruct(int row)
 {
 	int i;
@@ -99,11 +75,11 @@ int	main(int argc, char **argv)
 	
 	while (i < row)
 	{
-		printf("%d\n", str[i].nb);
+		printf("%d", str[i].nb);
+		write(1, " ", 1);
+		printf("%s\n", str[i].val);
 		i++;
 	}
-
-
 }
 
 char	*ft_getval(int fd, char *c)
