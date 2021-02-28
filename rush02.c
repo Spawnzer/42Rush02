@@ -6,7 +6,7 @@
 /*   By: adubeau <marvin@42quebec.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/28 10:41:50 by adubeau           #+#    #+#             */
-/*   Updated: 2021/02/28 13:49:59 by adubeau          ###   ########.fr       */
+/*   Updated: 2021/02/28 14:21:07 by adubeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
 #include <stdio.h>
 
 char	*ft_getval(int, char *);
-t_list	*ft_makeStruct(int);
+//t_list	ft_makeStruct(int);
 char	*ft_getnb(int);
 int	ft_atoi(char *);
-char	*strdup( char *);
+char	*fstrdup( char *);
 
 
 typedef struct t_list
@@ -28,6 +28,8 @@ typedef struct t_list
 	char *val;
 }		t_list;
 
+t_list *ft_makeStruct(int);
+/*
 int	main(int argc, char **argv)
 {
 	t_list	*str;
@@ -41,15 +43,16 @@ int	main(int argc, char **argv)
 	while (read(fd, &c, 1))
 			if (c == '\n')
 				row++;
-	str = ft_makeStruct(row);
+	str = &ft_makeStruct(row);
+	fprintf("%d", str.nb)
 	while (i < row)
 	{
-	//	fprintf("%d", str[i].nb);
+		fprintf("%d", str[i].nb);
 		i++;
 	}
 
 }
-
+*/
 t_list *ft_makeStruct(int row)
 {
 	int i;
@@ -73,12 +76,37 @@ t_list *ft_makeStruct(int row)
 			read(fd, c, 1);
 		tmp = ft_getval(fd, c);
 		
-		str[i].val = strdup(tmp);
+		str[i].val = fstrdup(tmp);
 		i++;
 	}
+	return(str);
+}
+int	main(int argc, char **argv)
+{
+	t_list	*str;
+	int row;
+	char c;
+	int i;
+	int fd;
+	fd = open("numbers.dict.txt", O_RDONLY);
+	i = 0;
+	row = 0;
+	while (read(fd, &c, 1))
+			if (c == '\n')
+				row++;
+	str = ft_makeStruct(row);
+	//printf("%d", str->nb);		
+	
+	while (i < row)
+	{
+		printf("%d\n", str[i].nb);
+		i++;
+	}
+
+
 }
 
-char	*ft_getvaal(int fd, char *c)
+char	*ft_getval(int fd, char *c)
 {
 	int i;
 	char *str;
@@ -95,7 +123,7 @@ char	*ft_getvaal(int fd, char *c)
 	return (str);
 }
 
-char	*ft_getnnb(int fd)
+char	*ft_getnb(int fd)
 {
 	int i;
 	char c[1];
@@ -179,7 +207,7 @@ char	*ft_strcpy(char *s1, char *s2)
 	return (s2);
 }
 
-char	*strdup(char *src)
+char	*fstrdup(char *src)
 {
 	char *dest;
 
